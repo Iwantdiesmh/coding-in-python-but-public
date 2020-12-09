@@ -1,0 +1,9 @@
+bill = int(input('what is the total on the bill: '))
+tip = int(input('what % tip would you like to give: '))
+people = int(input('how many people are sharing the bill: '))
+tipamount = bill*tip/100
+billamount = bill + tip
+print('tip amount =', tipamount)
+print('bill amount =', billamount)
+print('tip amount per person =', tip/people)
+print('total amount per person =', billamount/people)
