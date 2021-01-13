@@ -8,25 +8,26 @@ scissors = 33
 userpoints = 0
 cpupoints = 0
 
-while True:
-    def cpuhand():
-        hand = random.randint(1,100)
-        if hand >= 0 and hand <= rock:
-            ai = 'rock'
-        if hand >= rock + 1 and hand <= rock + paper:
-            ai = 'paper'
-        if hand >= rock + paper + 1:
-            ai = 'scissors'
-        return ai
+ls = ['rock','paper','scissors']
 
+def cpuhand():
+    hand = random.randint(1,100)
+    if hand >= 0 and hand <= rock:
+        ai = 'rock'
+    if hand >= rock + 1 and hand <= rock + paper:
+        ai = 'paper'
+    if hand >= rock + paper + 1:
+        ai = 'scissors'
+    return ai
+
+while True:
     user = input('''Do you want to use rock, paper, or scissors (no capitalization please)
 ''')
 
-    #while user != 'rock' or user != 'scissors' or user != 'paper':
-        #print('please type "rock", "paper", or "scissors". Case sensitive.')
-        #user = input('''Do you want to use rock, paper, or scissors (no capitalization please)
-#''')
-    
+    if user not in ls:
+        print('could not recognize input')
+        continue
+
     cpu = cpuhand()
     print("You chose", user, "and cpu chose", cpu)
 
@@ -50,6 +51,7 @@ while True:
         cpupoints += 1
 
     if user == 'rock':
+
         rock -= 3
         scissors -= 3
         paper += 6
