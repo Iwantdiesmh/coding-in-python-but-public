@@ -1,13 +1,11 @@
-import random #so now that I think about it the user will most of the time win because of
-                         #being able to predict what the cpu will do next. since the probability of playing
-                         #the losing hand lessens after it is played once, but it's mostly even. It's hard to
-                         #explain so I'll do it in class
+import random
+
 rock = 33
 paper = 34
 scissors = 33
 userpoints = 0
 cpupoints = 0
-rnd = 0
+rnd = 1
 
 ls = ['rock','paper','scissors']
 
@@ -52,62 +50,57 @@ while True:
         print("CPU wins!")
         cpupoints += 1
 
+#there is still quite a big problem. When paper and scissors are both <15, this can cause one to shoot
+#into the negative. Angus, please fix.
 
-        #simplified the code a little so it only affects two variables rather than three so I could
-        #make this code with more ease rather than worry about what may happen if both of them
-        #go negative and how to balance that (it gets quite complicated)
-        #--and changed it so it only changes when the user wins
-        #--and removed it ^
-        #time to unindent everything
-
-        #just realize that this poses a number of problems in of itself but I'll revist this when I
-        #get the other code working
-
-        #it's been 30 minutes and I'm still trying to figure out how this works ahaha
-        #edit: time to add new code up here. Finally figured it out.
-        
-    if user == 'rock' and scissors < 15:
-        scissors += 10
-        paper -= 10
-    elif user == 'scissors' and paper < 15:
-        paper += 10
-        rock -= 10
-    elif user == 'paper' and rock < 15:
-        rock += 10
-        scissors -= 10
-                
-        #basically what this code does is that, for example, play 8 rocks in a row, the scissors will be 20% or lower.
-        #and since the system detects that 'hey this person isn't playing 50 rocks in a row anymore and using the
-        #80% paper percentages to win a good amount of rounds by playing scissors over and over again.'
-        #basically it detects the abuse of the system and soft resets it meaning that the player cant abuse the
-        #high percentages
-
-        #this may or may not work.
-
-        #I can feel my sanity dropping already 
+#update: should be fixed. I added another code though I'm suprised it didn't break because I accidentally
+#typed "if rock < 15 < scissors > 40:" and that somehow worked. Now it's back to if "rock < 15 and scissors > 40:"
 
     if user == 'rock':
-        if scissors >= 15:
-            scissors -= 5
-            paper += 5 
-    elif user == 'scissors':
-        if paper >= 15:
+        if rock < 15 and scissors > 40:
+            rock += 10
+            paper += 5
+            scissors -= 15
+        elif scissors - 6 < 0 or rock -2 < 0:
+            scissors = scissors #filler code that I'll change when I figure out a way to do it
+        else:
+            rock -= 2
+            scissors -= 6
+            paper += 8
+            
+    if user == 'paper':
+        if paper < 15 and rock > 40:
+            paper += 10
+            scissors += 5
+            rock -= 15
+        elif rock - 6 < 0 or paper - 2 < 0:
+            rock = rock
+        else:
+            paper -= 2
+            rock -= 6
+            scissors += 8
+            
+    if user == 'scissors':
+        if scissors < 15 and paper > 40:
+            scissors += 10
             rock += 5
-            paper -= 5
-    elif user == 'paper':
-        if rock >= 15:
-            rock -= 5
-            scissors += 5       
+            paper -= 15
+        elif paper - 6 < 0 or scissors - 2 < 0:
+            paper = paper
+        else:
+            scissors -= 2
+            paper -= 6
+            rock += 8
 
-    #I want to say something is wrong with my code, but I'm out of brain juice and I've complicated it so much
-    #that it's hard to track down at this point.
 
-    print('User has', userpoints, 'points. Cpu has', cpupoints)
+    print('''''')
+    print('User has', userpoints, 'points. Cpu has', cpupoints, 'points')
     rnd += 1
 
-    print(rock)
-    print(paper)
-    print(scissors)
+    print('rock =', rock)
+    print('paper =', paper)
+    print('scissors =', scissors)
+    print('')
 
     
 
