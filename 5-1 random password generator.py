@@ -2,7 +2,7 @@ from tkinter import *
 import random
 Uppercase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 Lowercase = ['a','b','c','d','e','f','g','h','i','h','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-Symbols = ['!','@','#','$','%','&']
+Symbols = ['!','@','#','$','%','&','_','-']
 Numbers = ['1','2','3','4','5','6','7','8','9','0']
 password = ''
 length = random.randint(4,10)
@@ -21,12 +21,13 @@ def randompassword(length):
             password = password + random.choice(Numbers)
         length -= 1
 
-randompassword(length)
-
 window = Tk()
 window.title('Password Generator')
 
 def password_generator():
+   global password
+   password = ''
+   randompassword(length)
    print(password)
    display_area.config(text = password, fg = 'black', bg = 'white')
 
